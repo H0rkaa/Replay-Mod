@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #  Minetest Replay Mod
 
 A Minetest mod that lets you **record**, **replay**, and **undo** changes made to the world.  
@@ -53,6 +52,4 @@ This project is released under the **EUPL - v1.2**.
 
 Contributions are welcome!  
 Feel free to open issues or pull requests for bug fixes, ideas, or improvements.
-=======
-https://github.com/H0rkaa/Replay-Mod/tree/main/replay#readme
->>>>>>> 0a17a43ed7171f7f6648ebb67608ecb1bdf9acf4
+
