@@ -1,6 +1,6 @@
-#  Minetest Replay Mod
+#  Luanti Replay Mod
 
-A Minetest mod that lets you **record**, **replay**, and **undo** changes made to the world.  
+A Luanti mod that lets you **record**, **replay**, and **undo** changes made to the world.  
 Inspired by the Minecraft Replay Mod, this tool is designed for creating demos, videos, or testing features in a controlled environment.
 
 ---
@@ -23,9 +23,10 @@ Check out a live demo on YouTube:
 
 ##  Installation
 
-1. Clone or download this repository into your Minetest `mods/` folder.
-2. Enable the mod in your world settings.
-3. Use the in-game commands to manage recordings and replays.
+1. Clone or download this repository into your Luanti `mods/` folder.
+2. Put the mod as a confidence mod in the advanced settings of Luanti.
+3. Enable the mod in your world settings.
+4. Use the in-game commands to manage recordings and replays.
 
 ---
 
