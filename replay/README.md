@@ -44,8 +44,7 @@ All replays are played in a separate replay world to avoid altering your origina
 
 ## 📄 License
 
-This project is released under the **MIT License**.  
-You're free to use, modify, and share it.
+This project is released under the **EUPL - v1.2**.  
 
 ---
 
