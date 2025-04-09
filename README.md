@@ -1,11 +1,12 @@
-# 🎮 Minetest Replay Mod
+<<<<<<< HEAD
+#  Minetest Replay Mod
 
 A Minetest mod that lets you **record**, **replay**, and **undo** changes made to the world.  
 Inspired by the Minecraft Replay Mod, this tool is designed for creating demos, videos, or testing features in a controlled environment.
 
 ---
 
-## 🛠️ Key Features
+##  Key Features
 
 - Record world modifications in real time.
 - Replay saved sessions in a dedicated replay world.
@@ -14,14 +15,14 @@ Inspired by the Minecraft Replay Mod, this tool is designed for creating demos, 
 
 ---
 
-## 🎥 Demo Video
+## Demo Video
 
 Check out a live demo on YouTube:  
-👉 [Watch the video](https://www.youtube.com/watch?v=VIDEOLINK)
+ [Watch the video](https://www.youtube.com/watch?v=VIDEOLINK)
 
 ---
 
-## 📦 Installation
+##  Installation
 
 1. Clone or download this repository into your Minetest `mods/` folder.
 2. Enable the mod in your world settings.
@@ -29,7 +30,7 @@ Check out a live demo on YouTube:
 
 ---
 
-## 💡 Usage
+##  Usage
 
 In-game commands:
 
@@ -42,13 +43,16 @@ All replays are played in a separate replay world to avoid altering your origina
 
 ---
 
-## 📄 License
+##  License
 
 This project is released under the **EUPL - v1.2**.  
 
 ---
 
-## 🤝 Contributing
+##  Contributing
 
 Contributions are welcome!  
 Feel free to open issues or pull requests for bug fixes, ideas, or improvements.
+=======
+https://github.com/H0rkaa/Replay-Mod/tree/main/replay#readme
+>>>>>>> 0a17a43ed7171f7f6648ebb67608ecb1bdf9acf4
