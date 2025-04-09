@@ -1,71 +1,80 @@
 -- init.lua
--- Initialisation du mod Replay
 
--- Crée la table globale Replay si elle n'existe pas
 replay = {}
+replay.current_recording = nil
+replay.active_replay = nil
+replay.undo_data = {}
 
--- Chargement des sous-modules
 dofile(minetest.get_modpath("replay") .. "/storage.lua")
 dofile(minetest.get_modpath("replay") .. "/record.lua")
 dofile(minetest.get_modpath("replay") .. "/playback.lua")
+dofile(minetest.get_modpath("replay") .. "/undo.lua")
 
-local current_name = nil
-
--- Commande pour démarrer l'enregistrement
+-- Commande /r_start
 minetest.register_chatcommand("r_start", {
     params = "<name>",
-    description = "Démarre l'enregistrement du monde",
-    func = function(name, param)
-        if param == "" then
-            return false, "Vous devez fournir un nom pour l'enregistrement."
+    description = "Démarre un enregistrement",
+    func = function(_, param)
+        if param == "" then return false, "Nom requis." end
+        if replay.current_recording then
+            return false, "Un enregistrement est déjà en cours."
         end
-
-        -- Vérifier qu'on n'est pas déjà dans un monde _replay
         if minetest.get_worldpath():match("_replay$") then
-            return false, "Vous ne pouvez pas enregistrer dans un monde de replay."
+            return false, "Impossible d'enregistrer dans un monde _replay."
         end
 
-        current_name = param
+        replay.current_recording = param
         replay.create_clean_world()
-        replay.start_recording(current_name)
-        return true, "Enregistrement démarré sous le nom : " .. current_name
+        replay.start_recording(param)
+        return true, "Enregistrement démarré : " .. param
     end
 })
 
--- Commande pour arrêter l'enregistrement
+-- Commande /r_stop
 minetest.register_chatcommand("r_stop", {
-    description = "Arrête l'enregistrement et crée le monde de replay",
-    func = function(name)
-        if not current_name then
-            return false, "Aucun enregistrement en cours."
+    description = "Arrête l'enregistrement",
+    func = function()
+        if not replay.current_recording then
+            return false, "Aucun enregistrement actif."
         end
 
+        local name = replay.current_recording
         replay.stop_recording()
         local base_path = minetest.get_worldpath():gsub("_replay$", "")
-        replay.duplicate_world(base_path, current_name)
-        current_name = nil
-        return true, "Enregistrement terminé et monde replay créé."
+        replay.duplicate_world(base_path, name)
+        replay.current_recording = nil
+        return true, "Enregistrement '" .. name .. "' terminé."
     end
 })
 
--- Commande pour jouer un enregistrement
+-- Commande /r_play
 minetest.register_chatcommand("r_play", {
     params = "<name>",
-    description = "Rejoue les modifications enregistrées",
-    func = function(name, param)
-        if param == "" then
-            return false, "Vous devez fournir un nom de replay à jouer."
-        end
-
+    description = "Joue un replay",
+    func = function(_, param)
+        if param == "" then return false, "Nom du replay requis." end
         if not minetest.get_worldpath():match("_replay$") then
-            return false, "Vous devez être dans un monde _replay pour lire un enregistrement."
+            return false, "Vous devez être dans un monde _replay."
         end
-
+        if replay.active_replay then
+            return false, "Un replay est déjà en cours."
+        end
         local ok, err = replay.play(param)
         if ok then
-            return true, "Lecture du replay '" .. param .. "' démarrée."
+            return true, "Lecture de '" .. param .. "' en cours."
         else
-            return false, "Erreur : " .. (err or "inconnue")
+            return false, "Erreur: " .. (err or "inconnue")
         end
+    end
+})
+
+-- Commande /r_undo
+minetest.register_chatcommand("r_undo", {
+    params = "<name>",
+    description = "Annule les modifications du replay donné",
+    func = function(_, param)
+        if param == "" then return false, "Nom requis." end
+        local ok, msg = replay.undo(param)
+        return ok, msg
     end
 })
